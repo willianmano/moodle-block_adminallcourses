@@ -40,5 +40,8 @@
         </span>
         <span class="text-truncate">{{{coursecategory}}}</span>
     {{/coursecategory}}
-    {{$coursename}} {{{ fullname }}} {{/coursename}}
+    {{$coursename}}
+        {{#visible}}{{{ fullname }}}{{/visible}}
+        {{^visible}}<span class="text-muted">{{{ fullname }}}</span>{{/visible}}
+    {{/coursename}}
 {{/ core_course/coursecard }}

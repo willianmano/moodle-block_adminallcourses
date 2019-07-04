@@ -47,9 +47,9 @@ class main implements renderable, templatable {
      * @throws \Exception
      */
     public function export_for_template(renderer_base $output) {
-        global $DB;
+        global $DB, $CFG;
 
-        $sql = 'SELECT c.id, c.shortname, c.fullname, cc.name as coursecategory
+        $sql = 'SELECT c.id, c.shortname, c.fullname, c.visible, cc.name as coursecategory
                 FROM {course} c
                 INNER JOIN {course_categories} cc ON cc.id = c.category 
                 WHERE c.id > 0';
@@ -62,8 +62,10 @@ class main implements renderable, templatable {
                 'id' => $course->id,
                 'shortname' => $course->shortname,
                 'fullname' => $course->fullname,
+                'visible' => $course->visible,
                 'courseimage' => $this->get_summary_image_url($course),
                 'coursecategory' => $course->coursecategory,
+                'viewurl' => $CFG->wwwroot . '/course/view.php?id=' . $course->id
             ];
         }
 
